@@ -1,33 +1,164 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web-Based Wallet
+
+A secure, decentralized cryptocurrency wallet built with Next.js, featuring seed phrase generation and multiple wallet management.
+
+## Features
+
+- 🔐 **Secure Seed Phrase Generation** - Generate BIP39-compliant 12-word seed phrases
+- 💼 **Multiple Wallets** - Create unlimited wallets from a single seed phrase
+- 🔑 **Unique Key Pairs** - Each wallet has unique ED25519 public/private key pairs
+- 🌓 **Dark/Light Mode** - Beautiful theme toggle with system preference support
+- 📱 **Mobile Responsive** - Fully optimized for all device sizes
+- 🔒 **Privacy First** - All data stored locally in sessionStorage
+
+## Tech Stack
+
+- **Framework**: Next.js 15.5.6 with React 19
+- **UI**: shadcn/ui + Tailwind CSS v4
+- **Cryptography**: BIP39, BIP44 derivation, ED25519 (tweetnacl)
+- **Theme**: next-themes
+- **TypeScript**: Full type safety
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ installed
+- npm, yarn, or pnpm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd web-based-wallet
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Create optimized production build
+npm run build
 
-## Learn More
+# Start production server
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Option 1: Deploy via Vercel CLI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+### Option 2: Deploy via GitHub
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com)
+3. Import your repository
+4. Vercel will auto-detect Next.js and deploy
+
+### Option 3: Deploy Button
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=<your-repo-url>)
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/
+│   │   ├── page.tsx              # Main wallet management page
+│   │   ├── seed-phrase/
+│   │   │   └── page.tsx          # Seed phrase generation/import
+│   │   ├── layout.tsx            # Root layout with theme provider
+│   │   ├── globals.css           # Global styles
+│   │   └── icon.svg              # Custom favicon
+│   ├── components/
+│   │   ├── ui/                   # shadcn/ui components
+│   │   ├── SeedPhraseDisplay.tsx # Seed phrase component
+│   │   ├── WalletCard.tsx        # Wallet display component
+│   │   ├── theme-provider.tsx    # Theme context provider
+│   │   └── theme-toggle.tsx      # Theme switcher component
+│   └── lib/
+│       ├── utils.ts              # Utility functions
+│       └── wallet.ts             # Core wallet cryptography
+├── public/                       # Static assets
+├── package.json                  # Dependencies
+├── next.config.ts                # Next.js configuration
+├── tsconfig.json                 # TypeScript configuration
+└── vercel.json                   # Vercel deployment config
+```
+
+## Security Notes
+
+⚠️ **Important Security Considerations:**
+
+- This is a demo wallet for educational purposes
+- Never use for production with real funds without proper security audit
+- Seed phrases are stored in sessionStorage (cleared on browser close)
+- Private keys are hidden by default with bullet masking
+- No server-side storage - all cryptography happens client-side
+
+## Features in Detail
+
+### Seed Phrase Management
+- Generate secure 12-word BIP39 mnemonics
+- Import existing seed phrases
+- Validate seed phrase format
+- Hide/show seed words with bullet masking
+
+### Wallet Generation
+- BIP44 derivation path: `m/44'/501'/accountIndex'/0'`
+- ED25519 key pair generation
+- Unique wallet IDs using SHA-256
+- Public/private key display with copy functionality
+
+### User Interface
+- Clean, modern design with shadcn/ui
+- Responsive layouts for mobile, tablet, desktop
+- Dark/light theme with custom toggle animation
+- Accessibility-focused components
+
+## Scripts
+
+```bash
+npm run dev      # Start development server (with Turbopack)
+npm run build    # Create production build
+npm start        # Start production server
+npm run lint     # Run ESLint
+```
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## License
+
+MIT
+
+## Contributing
+
+Contributions welcome! Please open an issue or submit a pull request.
+
+---
+
+Built with ❤️ using Next.js and shadcn/ui
 
 ## Deploy on Vercel
 
