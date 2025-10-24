@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { WalletCard } from '@/components/WalletCard';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { generateWalletFromSeed, Wallet } from '@/lib/wallet';
-import { Wallet2, Plus, Key } from 'lucide-react';
+import { Wallet2, Plus, Key, Coins } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
@@ -85,14 +85,23 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="pt-2 sm:pt-4">
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
               <Button 
                 onClick={() => router.push('/seed-phrase')} 
                 size="lg" 
                 className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
               >
                 <Key className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Get Started
+                Create Wallet
+              </Button>
+              <Button 
+                onClick={() => router.push('/airdrop')} 
+                size="lg" 
+                variant="outline"
+                className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
+              >
+                <Coins className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                Airdrop
               </Button>
             </div>
 
@@ -125,6 +134,11 @@ export default function Home() {
           <Button onClick={handleAddWallet} className="flex items-center space-x-2 flex-1 sm:flex-none">
             <Plus className="h-4 w-4" />
             <span>Add Wallet</span>
+          </Button>
+          
+          <Button onClick={() => router.push('/airdrop')} variant="outline" className="flex-1 sm:flex-none">
+            <Coins className="mr-2 h-4 w-4" />
+            <span>Airdrop</span>
           </Button>
           
           <Button onClick={handleChangeSeed} variant="outline" className="flex-1 sm:flex-none">

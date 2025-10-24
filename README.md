@@ -4,17 +4,28 @@ A secure, decentralized cryptocurrency wallet built with Next.js, featuring seed
 
 ## Features
 
+### Wallet Creation (Seed Phrase)
 - 🔐 **Secure Seed Phrase Generation** - Generate BIP39-compliant 12-word seed phrases
 - 💼 **Multiple Wallets** - Create unlimited wallets from a single seed phrase
 - 🔑 **Unique Key Pairs** - Each wallet has unique ED25519 public/private key pairs
-- 🌓 **Dark/Light Mode** - Beautiful theme toggle with system preference support
-- 📱 **Mobile Responsive** - Fully optimized for all device sizes
 - 🔒 **Privacy First** - All data stored locally in sessionStorage
+
+### Airdrop Feature (New!) ⭐
+- 💰 **Solana Airdrop** - Request test SOL on devnet and testnet
+- 🔗 **Wallet Connection** - Connect any Solana wallet by address (no private key needed)
+- � **Network Switching** - Switch between Solana devnet and testnet
+- 📊 **Balance Display** - Real-time wallet balance with manual refresh
+- 🔍 **Explorer Integration** - View wallets and transactions on Solana Explorer
+
+### General
+- �🌓 **Dark/Light Mode** - Beautiful theme toggle with system preference support
+- 📱 **Mobile Responsive** - Fully optimized for all device sizes
 
 ## Tech Stack
 
 - **Framework**: Next.js 15.5.6 with React 19
 - **UI**: shadcn/ui + Tailwind CSS v4
+- **Blockchain**: Solana Web3.js for wallet connection and airdrops
 - **Cryptography**: BIP39, BIP44 derivation, ED25519 (tweetnacl)
 - **Theme**: next-themes
 - **TypeScript**: Full type safety
@@ -80,9 +91,11 @@ vercel
 ```
 ├── src/
 │   ├── app/
-│   │   ├── page.tsx              # Main wallet management page
+│   │   ├── page.tsx              # Home page with two options
 │   │   ├── seed-phrase/
 │   │   │   └── page.tsx          # Seed phrase generation/import
+│   │   ├── airdrop/              # NEW: Airdrop feature
+│   │   │   └── page.tsx          # Wallet connection & airdrop
 │   │   ├── layout.tsx            # Root layout with theme provider
 │   │   ├── globals.css           # Global styles
 │   │   └── icon.svg              # Custom favicon
@@ -94,7 +107,8 @@ vercel
 │   │   └── theme-toggle.tsx      # Theme switcher component
 │   └── lib/
 │       ├── utils.ts              # Utility functions
-│       └── wallet.ts             # Core wallet cryptography
+│       ├── wallet.ts             # Core wallet cryptography
+│       └── airdrop.ts            # NEW: Solana airdrop utilities
 ├── public/                       # Static assets
 ├── package.json                  # Dependencies
 ├── next.config.ts                # Next.js configuration
@@ -121,16 +135,27 @@ vercel
 - Hide/show seed words with bullet masking
 
 ### Wallet Generation
-- BIP44 derivation path: `m/44'/501'/accountIndex'/0'`
+- BIP44 derivation path: `m/44'/501'/accountIndex'/0'` (501 is Solana's coin type)
 - ED25519 key pair generation
 - Unique wallet IDs using SHA-256
 - Public/private key display with copy functionality
+
+### Airdrop Feature (Separate Page)
+- **Connect Wallet**: Enter any Solana wallet address (Base58 format)
+- **No Private Key Required**: Safe connection using public address only
+- **Network Selection**: Toggle between Solana devnet and testnet
+- **Balance Checking**: Real-time balance display with refresh button
+- **Airdrop Requests**: Request 1 SOL from Solana faucet
+- **Transaction Tracking**: View transaction signatures and status
+- **Explorer Links**: Direct links to Solana Explorer for addresses and transactions
+- **Error Handling**: Clear error messages and status updates
 
 ### User Interface
 - Clean, modern design with shadcn/ui
 - Responsive layouts for mobile, tablet, desktop
 - Dark/light theme with custom toggle animation
 - Accessibility-focused components
+- Consistent design across both features
 
 ## Scripts
 
